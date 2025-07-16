@@ -1,0 +1,237 @@
+<odoo>
+  <data>
+<!-- Form View -->
+      <record id="formreview_view_form" model="ir.ui.view">
+            <field name="name">formreview.lead.form</field>
+            <field name="model">formreview.lead</field>
+            <field name="arch" type="xml"> 
+             <form>
+                <sheet>
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button" type="object"
+                        name="action_open_custom_web_form" icon="fa-globe icon">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Tạo Form</span>
+                            </div>
+                    </button>
+            
+          
+                </div>
+                <group string="THÔNG TIN FORM">
+                    <group string="Cố vấn và Luật sư">
+                        <field name="covanluatsu"/> 
+                        <field name="covanct"/>                  
+                        <field name="ketqua"/>
+                    </group>
+                    <group string="Thiết lập form">           
+                        <field name="close_form"/>                  
+                        <field name="ngayguiform"/>
+                        <!-- <field name="link_ur" widget="url" options="{'target': '_blank'}"/> -->
+                        <field name="link_ur" widget="copy_to_clipboard"/>                        
+                    </group>
+                </group>
+
+                
+                <group string="THÔNG TIN CƠ BẢN">
+                        <group>
+                            <field name="lead_form_id"/>  
+                            <field name="quoctich"/>   
+                            <field name="gioitinh"/> 
+                            <field name="namsinhnd"/>  
+                            <!-- <field name="email"/>   -->
+                        </group>
+                        <group>   
+                            <!-- <field name="phone"/>             -->
+                            <field name="hkthuongtru"/>
+                             <field name="noio"/>
+                            <field name="tinhtranghn"/>   
+                        </group>
+                    </group>
+
+                    <group string="Nguyện vọng của đương đơn">
+                        <group>
+                            <field name="nguyenvongdd"/>
+                            <field name="nhucau"/> 
+                            <field name="visa"/>   
+                            <field name="quocgiabook"/>                         
+                        </group>
+                        <group>   
+                            <field name="nghebooking"/>  
+                            <field name="nguoithan"/>  
+                        </group>
+                    </group>
+
+                    <group string="Năng lực ứng viên (đương đơn)">
+                        <group>
+                            <field name="chungchitaynghe"/> 
+                            <field name="bangcap"/>   
+                            <field name="chuyennganh"/>                         
+                        </group>
+                        <group>   
+                            <!--<field name="truongcap"/> --> 
+                            <field name="namtotnghiep"/>  
+                        </group>
+                    </group>
+                    <group string="Trình độ tiếng Anh">
+                        <group>
+                            <field name="tienganh"/> 
+                            <field name="chungchita"/>  
+                        </group>
+                        <group>   
+                           <field name="namcapccta"/> 
+                        </group>
+                    </group>
+
+                    <group string="KINH NGHIỆM LÀM VIỆC: (Từ lúc 18 tuổi đến nay) Bao gồm công việc part time hoặc full time. Ứng viên có thể thay thế nội dung thông tin bằng CV mô tả chi tiết, đính kèm vào form thông tin này">
+                        <group string="I. Công việc hiện tại (Vị trí trên HĐLĐ nếu có)">
+                            <field name="congviecht"/>
+                            <field name="tendoanhnghiepht"/> 
+                            <field name="thoigianlamht"/>   
+                            <field name="kinhnghiemht"/>
+                        </group>
+                        <group string="II. Các công việc trước đây (trong 5 đến 10 năm gần nhất) (nếu có)">   
+                           <field name="congviectruocday"/> 
+                           <field name="tendoanhnghiep"/> 
+                            <field name="thoigianlam"/>   
+                            <field name="kinhnghiem"/> 
+                        </group>
+                    </group>
+
+                      <group string="TIỂU SỬ DI TRÚ (Ứng viên có thể thay thế nội dung thông tin dưới đây bằng đơn nộp visa cũ)">
+                        <group>
+                            <field name="capvisadulichvfs"/> 
+                            <field name="capvisalaodongvfs"/>   
+                             <field name="capvisaqgkhac"/> 
+                                                    
+                        </group>
+                        <!--<group>   
+                           <field name="caplaivisa"/> 
+                           <field name="tuchoivisagd"/> 
+                        </group> -->
+                    </group>
+
+                      <group string="TƯ PHÁP/SỨC KHỎE">
+                        <group string="Lý lịch tư pháp">
+                            <field name="phamphap"/>                                                     
+                        </group>
+                        <group string="Tình trạng sức khỏe">   
+                           <field name="suckhoe"/> 
+                        </group>
+                    </group>
+
+                    <group string="CHỨNG MÌNH TÀI CHÍNH GIA ĐÌNH (Chỉ áp dụng với Khách hàng có nhu cầu Du học)">
+                        <!--<group>
+                            <field name="nguoitaitro_dh"/>  
+                            <field name="luongthangdd_dh"/>                                                   
+                            <field name="luongthangpt_dh"/>                           
+                        </group>-->
+                        <group>   
+                           <!--<field name="thunhapbds_dh"/>--> 
+                            <field name="sotk_dh"/>
+                            <field name="tsbds_dh"/>
+                        </group>
+                    </group>
+
+                    <group string=" CHỨNG MINH TÀI CHÍNH ĐƯƠNG ĐƠN/ NGƯƠI PHỤ THUỘC">
+                        <group string="I. Dành cho đương đơn là người đi làm">
+                            <!--<field name="luongthang"/>  
+                            <field name="luongthang_pt"/> 
+                            <field name="thunhapbds"/>-->   
+                            <field name="sotk"/> 
+                            <field name="tsbds"/>                                                  
+                                                    
+                        </group>
+                        <group string="II. Dành cho đương đơn hoặc người phụ thuộc là chủ doanh nghiệp">   
+                            <field name="hinhthucdn"/>   
+                            <field name="dongthuedn"/> 
+                            <field name="giayphepkddn"/>
+                            <field name="mst_webdn"/>   
+                            <field name="thunhapbdsdn"/> 
+                            <field name="sotkdn"/>
+                            <field name="bdsdn"/>
+                        </group>
+                    </group>
+                    <group string="III. Phần dành cho người phụ thuộc">
+                        <group>
+                            <field name="name_npt"/>  
+                            <field name="namsinh_npt"/>
+                            <field name="bangcap_npt"/>   
+                        </group>
+                        <group>  
+                            <field name="cvht_npt"/> 
+                            <field name="tienganh_npt"/>
+                        </group>
+                    </group>
+                    </sheet>   
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>  
+
+
+                </form>                    
+            </field> 
+    </record>
+
+
+    <!-- List view -->
+    <record model="ir.ui.view" id="formreview_lead_list_view">
+      <field name="name">formreview.lead.list</field>
+      <field name="model">formreview.lead</field>
+      <field name="arch" type="xml" >
+      <tree default_order="id desc">  
+                    <field name="lead_form_id"/> 
+                    <field name="quoctich"/>   
+                    <field name="gioitinh"/> 
+                    <field name="namsinhnd"/>  
+                    <field name="email" groups="bissweb.group_crm_manager"/> 
+                    <field name="phone" groups="bissweb.group_crm_manager"/>    
+                    <field name="hkthuongtru"/>
+                    <field name="noio"/>
+                    <field name="tinhtranghn"/>   
+                    <field name="nhucau"/> 
+                    <field name="visa"/>   
+                    <field name="quocgiabook"/>  
+                    <field name="nghebooking"/>
+        </tree>
+      </field>
+    </record>
+
+     <!-- CRM-->
+   <record id="crm_form_lead_view" model="ir.ui.view">
+            <field name="name">crm.lead.form.lead.inherited</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">  
+                <button name="action_schedule_meeting" position="before">               
+                    <button class="oe_stat_button" type="object"  attrs="{'invisible': [('type', '=', 'opportunity')]}"
+                        name="action_view_form_lead" icon="fa-credit-card">
+                            <div class="o_stat_info">
+                                <field name="form_count" class="o_stat_value"/>
+                                <span class="o_stat_text">Chi tiết Form</span>
+                            </div>
+                    </button>
+                </button>
+            </field>
+      </record>       
+
+
+ <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="form_lead_review_action_window">
+      <field name="name">Form Lead</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">formreview.lead</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+<!-- Top menu item -->
+    <menuitem
+        id="menu_form_lead_view"
+        name="Form Lead"
+        parent="crm.crm_menu_root"
+        action="bissweb.form_lead_review_action_window"
+        groups="bissweb.group_crm_teamsale_user"
+        sequence="13"/>
+  </data>
+</odoo>

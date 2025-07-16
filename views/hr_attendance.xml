@@ -1,0 +1,29 @@
+<odoo>
+  <data>
+
+    <record id="hr_employee_public_view_tree_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.tree.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='job_id']" position="after">
+                <field name="last_check_in" optional="hide"/> 
+                <field name="last_check_out" optional="hide"/> 
+                <field name="leave_manager_id" optional="hide"/> 
+                <field name="remaining_leaves" optional="hide"/> 
+                <field name="current_leave_state" optional="hide"/> 
+                <field name="leave_date_from" optional="hide"/> 
+                <field name="leave_date_to" optional="hide"/> 
+                <field name="leaves_count" optional="hide"/> 
+                <field name="allocation_count" optional="hide"/> 
+                <field name="allocations_count" optional="hide"/> 
+
+            </xpath>
+        </field>
+    </record>
+
+
+
+  </data>
+</odoo>
+

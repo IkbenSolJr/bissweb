@@ -1,0 +1,410 @@
+<odoo>
+  <data>
+<!-- Lead Form View -->
+      <record id="crm_lead_view_form" model="ir.ui.view">
+            <field name="name">crm.lead.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml"> 
+                <xpath expr="//group[@name='lead_partner']/field[@name='partner_name']" position="after">
+                        <field name="gioitinh"/> 
+                        <field name="ngaynhap" groups="bissweb.group_crm_user"/>
+                        <field name="nhucau" groups="bissweb.group_crm_user"/>
+                        <field name="trangthaidt" groups="bissweb.group_crm_user"/>                         
+                        <field name="hocvan" groups="bissweb.group_crm_user"/>
+                        <field name="trinhdo" groups="bissweb.group_crm_user"/>                          
+                        <field name="noio" groups="bissweb.group_crm_user"/>
+                        <field name="trinhdotienganh" groups="bissweb.group_crm_user"/>
+                        <field name="tienganh" groups="bissweb.group_crm_user"/>
+                </xpath>
+                <xpath expr="//group[@name='opportunity_partner']" position="inside">
+                                <field name="gioitinh"/>  
+                                <field name="ngaynhap"/>
+                                <field name="nhucau"/>
+                                <field name="trangthaidt"/>    
+                                <field name="hocvan"/>   
+                                <field name="trinhdo"/>
+                                <field name="noio"/>
+                                <field name="trinhdotienganh"/> 
+                                <field name="tienganh"/>                                     
+                        
+                </xpath>
+
+                <xpath expr="//group/field[@name='date_deadline']" position="before">
+                                <field name="nghenghiep"/>
+                                <field name="taichinh"/>
+                                <field name="hopdong"/>
+                                <field name="visa"/>
+                                <field name="danhgiakh"/>
+                                <field name="lifecyclemql" readonly="1"  force_save="1"/>
+                                <field name="nghebooking"/>
+                                <field name="quocgiabook"/>
+                                <field name="namsinh" groups="bissweb.group_crm_user"/> 
+                                <field name="sinhnhat"/>  
+                                <field name="loai_data"/>                                 
+                        
+                </xpath>
+
+                <xpath expr="//group[@name='lead_partner']" position="after" >
+                          <group groups="bissweb.group_crm_teamsale_user" attrs="{'invisible': [('type', '=', 'opportunity')]}">                                         
+                            <field name="nghenghiep"/>
+                            <field name="taichinh"/>
+                            <field name="hopdong"/>
+                            <field name="visa"/>
+                            <field name="danhgiakh"/>
+                            <field name="lifecyclemql" readonly="1"  force_save="1"/>
+                            <field name="nghebooking"/>
+                            <field name="quocgiabook"/>
+                            <field name="namsinh" groups="bissweb.group_crm_user"/> 
+                            <field name="sinhnhat"/>
+                            <field name="loai_data"/>
+                          </group> 
+                </xpath>
+
+                <xpath expr="//group/field[@name='user_id']" position="before">                                        
+                            <field name="nguondt"/>
+                            <!-- <field name="nguondoitac"/> -->
+                </xpath>
+
+                <xpath expr="//group[@name='lead_priority']" position="after">
+                          <group groups="bissweb.group_crm_teamsale_user" > 
+                            <field name="adsdss" groups="bissweb.group_crm_user"/>
+                            <field name="ngaychuyengiao"/>
+                            <field name="ads_id"/>
+                          </group> 
+                </xpath>
+
+
+                <xpath expr="//notebook/page[@name='internal_notes']" position="before">
+                <page string="Nội dung cuộc gọi">
+                    <group>
+                        <field name="noidungtele"/>                     
+                    </group>
+                </page>               
+            </xpath>
+
+
+            <xpath expr="//field[@name='state_id']" position="attributes">
+                <attribute name="string">Tỉnh/TP</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="string">Khách hàng</attribute>
+            </xpath>
+
+             <field name="website" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>   
+            <field name="email_cc" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+               <field name="function" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+    
+              <field name="zip" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+              <field name="partner_name" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+              <field name="lang_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <!-- <field name="contact_name" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field> -->
+             <!-- <field name="nguondoitac" attrs="{'invisible': [('nguondt' ,'!=', 'doitac')]}"/> -->
+            <field name="partner_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            </field> 
+    </record>
+
+
+    <!-- List view definition -->
+          <record id="crm_lead_view_tre" model="ir.ui.view">
+            <field name="name">crm.lead.tree.lead.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//tree" position="inside">
+                    <header>
+                        <button name="action_sync_mql" type="object" string="Đồng bộ"/>
+                    </header>
+                </xpath>
+
+                <xpath expr="//tree" position="attributes" delete="false" default_order="id desc">
+                    <attribute name="decoration-info">color_data == 'xanh'</attribute>
+                    <attribute name="decoration-warning">color_data == 'vang'</attribute>
+                    <attribute name="decoration-danger">color_data == 'do'</attribute>
+                    <attribute name="decoration-success">danhgiakh == 'tiemnang' or danhgiakh == 'lenhopdongmau' or danhgiakh == 'kyhd' or danhgiakh == 'hot'</attribute>
+                    <attribute name="export_xlsx">0</attribute>
+                    <attribute name="delete">0</attribute>
+                    <attribute name="string">Khách hàng tiềm năng</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='country_id']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath> 
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="string">Khách hàng</attribute>
+                </xpath>                  
+                <xpath expr="//field[@name='name']" position="after">              
+                <field name="ngaynhap" optional="show"/>
+                <!-- <field name="write_date" string="Cập nhật cuối" widget="date" optional="hide"/> -->
+                <!-- <field name="o.date" widget="date" options="{'format': 'dd/MM/yyyy'}"/> -->
+                <field name="nhucau" optional="show"/>                
+                <field name="trangthaidt" optional="show" groups="bissweb.group_crm_teamsale_user"/>
+                <field name="lifecyclemql" readonly="1" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                <field name="nghebooking" optional="show"/>
+                <field name="quocgiabook" optional="show"/>
+                <field name="gioitinh" optional="show"/>
+                <field name="adsdss" optional="hide"/>
+                <field name="hocvan" optional="hide"/>
+                <field name="trinhdo" optional="hide"/>
+                <field name="trinhdotienganh" optional="hide"/>
+                <field name="tienganh" optional="hide"/>
+                <field name="ngaychuyengiao" optional="hide"/>
+                <field name="noio" optional="hide"/>
+                <field name="nghenghiep" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                <field name="taichinh" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                <field name="hopdong" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                <field name="visa" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                <field name="danhgiakh" optional="show" groups="bissweb.group_crm_teamsale_user"/>
+                <field name="namsinh" optional="hide"/>
+                <field name="sinhnhat" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                <field name="nguondt" optional="hide"/>
+		        <!-- <field name="nguondoitac" optional="hide" groups="bissweb.group_crm_teamsale_user"/> -->
+                <field name="color_data" invisible="1"/>       
+                <field name="loai_data" readonly="1" optional="hide"/>    
+                <field name="ads_id" optional="hide"/>  
+                <field name="form_count" optional="show" string="Đã điền form"/>     
+              </xpath>
+            </field>
+    </record>
+   <!--OPP explicit list view definition -->
+          <record id="crm_lead_tree_opportunity" model="ir.ui.view">
+            <field name="name">crm.lead.tree.opportunity.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+            <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="ngaynhap" optional="show"/>
+                <field name="nhucau" optional="hide"/>
+                <field name="trangthaidt" groups="bissweb.group_crm_teamsale_user"/>
+                <field name="lifecyclemql" readonly="1" optional="hide" groups="bissweb.group_crm_teamsale_user"/>             
+                <field name="nghebooking" optional="show"/>
+                <field name="quocgiabook" optional="show"/>
+                <field name="adsdss" optional="hide"/>
+                 <field name="ads_id" optional="hide"/> 
+                <field name="hocvan" optional="hide"/>
+                <field name="trinhdo" optional="hide"/>
+                <field name="trinhdotienganh" optional="hide"/>
+                <field name="tienganh" optional="hide"/>
+                <field name="noio" optional="hide"/>
+                <field name="nghenghiep" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                <field name="taichinh" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                <field name="hopdong" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                <field name="visa" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                <field name="danhgiakh" groups="bissweb.group_crm_teamsale_user"/>
+                <field name="namsinh" optional="hide"/>
+                <field name="sinhnhat" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                <field name="nguondt" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                <!-- <field name="nguondoitac" optional="hide" groups="bissweb.group_crm_teamsale_user"/> -->
+            </xpath>
+            </field>
+    </record>
+
+
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <div
+                attrs="{'invisible': [('same_vat_partner_id', '=', False)]}"
+                position="after">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    attrs="{'invisible': [('same_mobile_partner_id', '=', False)]}">
+                  Duplicate warning: partner <field
+                        name="same_mobile_partner_id"
+                    /> has the same <b>Mobile</b>.
+                </div>
+            </div>
+        </field>
+    </record>
+
+    <record id="view_partner_email_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <div
+                attrs="{'invisible': [('same_vat_partner_id', '=', False)]}"
+                position="after">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    attrs="{'invisible': [('same_email_partner_id', '=', False)]}">
+                        Duplicate warning: partner <field
+                        name="same_email_partner_id"
+                    /> has the same <b>Email</b>.
+                </div>
+            </div>
+        </field>
+    </record>
+
+
+
+    
+    <!--HR employee-->
+
+    <record id="view_employee_form_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"></field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='mobile_phone']" position="after">           
+                 <field name="namsinhnv" groups="bissweb.group_qlhr_employee"/>
+                <field name="dcccdnv" groups="bissweb.group_qlhr_employee"/>
+                <field name="diachinv" groups="bissweb.group_qlhr_employee"/>
+                <field name="masothue" groups="bissweb.group_qlhr_employee"/>
+                <field name="hopdongnv" groups="bissweb.group_qlhr_employee"/>
+                <field name="loaihdnv" groups="bissweb.group_qlhr_employee"/>
+                <field name="mucluongcb" groups="bissweb.group_qlhr_employee"/>
+                <field name="ngaykyhd" groups="bissweb.group_qlhr_employee"/>
+                <field name="ngaykthd" groups="bissweb.group_qlhr_employee"/>
+                <field name="gioitinh" groups="bissweb.group_qlhr_employee"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_employee_tree_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.tree.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"></field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="mobile_phone" string="Điện thoại" optional="hide"/>
+                  <field name="namsinhnv" optional="hide" groups="bissweb.group_qlhr_employee"/>
+                  <field name="dcccdnv" optional="hide" groups="bissweb.group_qlhr_employee"/>
+                  <field name="diachinv" optional="hide" groups="bissweb.group_qlhr_employee"/>
+                  <field name="masothue" optional="hide" groups="bissweb.group_qlhr_employee"/>
+                  <field name="hopdongnv" optional="show" groups="bissweb.group_qlhr_employee"/>
+                  <field name="loaihdnv" optional="hide" groups="bissweb.group_qlhr_employee"/>
+                  <field name="mucluongcb" optional="hide" groups="bissweb.group_qlhr_employee"/>
+                  <field name="ngaykyhd" optional="hide" groups="bissweb.group_qlhr_employee"/>
+                  <field name="ngaykthd" optional="hide" groups="bissweb.group_qlhr_employee"/>
+                  <field name="gioitinh" optional="hide" groups="bissweb.group_qlhr_employee"/>
+            </xpath>
+
+            <xpath expr="//tree/field[@name='activity_ids']" position="attributes">
+                 <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//tree/field[@name='activity_date_deadline']" position="attributes">
+                 <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//tree/field[@name='activity_user_id']" position="attributes">
+                 <attribute name="optional">hide</attribute>
+            </xpath>
+             <xpath expr="//tree/field[@name='company_id']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+
+                <xpath expr="//tree/field[@name='job_id']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+                <xpath expr="//tree/field[@name='parent_id']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+                <xpath expr="//tree/field[@name='work_phone']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+     
+        </field>
+    </record>
+
+
+    
+     <!--Điểm danh - Attendance -->
+
+    <record id="view_attendance_tree_inherit" model="ir.ui.view">
+        <field name="name">hr.attendance.tree.inherit</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='employee_id']" position="after">
+                <field name="department_id" optional="hide"/>
+            </xpath>
+       </field>
+    </record>
+ <!--HR Hợp đồng -->
+    <record id="hr_contract_history_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.contract.history.form.inherit</field>
+        <field name="model">hr.contract.history</field>
+         <field name="inherit_id" ref="hr_contract.hr_contract_history_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="contract_type_id"/>
+
+                </xpath>
+        </field>
+    </record>
+
+
+
+   <record id="hr_contract_history_view_list_inherit" model="ir.ui.view">
+        <field name="name">hr.contract.history.list.inherit</field>
+        <field name="model">hr.contract.history</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_history_view_list"/>
+        <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='date_start']" position="after">
+                        <field name="date_end" optional="hide"/>
+                        <field name="department_id" optional="hide"/>
+                        <field name="job_id" optional="hide"/>
+                        <field name="hr_responsible_id" optional="hide"/>
+                </xpath>
+                <xpath expr="//field[@name='date_hired']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+                <xpath expr="//field[@name='contract_count']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+                <!-- <xpath expr="//field[@name='name']" position="after">
+                        <field name="namsinhhd"/>
+                </xpath> -->
+
+        </field>
+    </record>
+
+
+
+
+
+   <!--Tim kiem lead -->
+        <record id="crm_search_view_lead_inherit" model="ir.ui.view">
+            <field name="name">crm.lead.search.lead.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.view_crm_case_leads_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='phone_mobile_search']" position="after">
+                        <field name="nhucau"/>
+                </xpath>
+                <xpath expr="//group" position="inside">
+                        <filter string="Ngày nhập data" name="ngaynhap" context="{'group_by':'ngaynhap:day'}"/>
+                        <filter string="Loại data" name="loai_data" context="{'group_by':'loai_data:mo'}"/>
+                        <filter string="Đã điền form" name="form_count" context="{'group_by':'form_count'}"/>
+                         
+                </xpath>
+            </field>
+        </record>
+
+  </data>
+</odoo>

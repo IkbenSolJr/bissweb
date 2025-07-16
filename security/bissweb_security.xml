@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <data>
+        <record id="module_category_crm" model="ir.module.category">
+            <field name="name">DSS Team</field>
+            <field name="description">Model phan quyen CRM</field>
+            <field name="sequence">9</field>
+        </record>
+        <record id="group_crm_user" model="res.groups">
+            <field name="name">Team data</field>
+            <field name="category_id" ref="module_category_crm" />
+        </record>
+
+       <record id="group_crm_teamsale_user" model="res.groups">
+            <field name="name">Team sale</field>
+            <field name="category_id" ref="module_category_crm" />
+            <field name="implied_ids" eval="[(4, ref('group_crm_user'))]" />
+        </record>
+
+        <record id="group_crm_sale_open_data_user" model="res.groups">
+            <field name="name">Sale Xem data mở</field>
+            <field name="category_id" ref="module_category_crm" />
+            <field name="implied_ids" eval="[(4, ref('group_crm_teamsale_user'))]" />
+        </record>
+
+        <record id="group_crm_marketing_user" model="res.groups">
+            <field name="name">Team Marketing</field>
+            <field name="category_id" ref="module_category_crm" />
+        </record>
+
+        <record id="group_crm_doitac_user" model="res.groups">
+            <field name="name">Team Đối tác</field>
+            <field name="category_id" ref="module_category_crm" />
+        </record>
+
+           <record id="group_crm_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_category_crm" />
+        </record>
+        <!-- <record id="group_crm_tele_user" model="res.groups">
+            <field name="name">Team Tele</field>
+            <field name="category_id" ref="module_category_crm" />
+            <field name="implied_ids" eval="[(4, ref('group_crm_user'))]" />
+        </record> -->
+
+        <record id="group_qlhr_employee" model="res.groups">
+            <field name="name">Quản lý Nhân sự</field>
+            <field name="category_id" ref="module_category_crm" />
+        </record>
+
+        <record id="admin_sale_crm" model="res.groups">
+            <field name="name">Admin sale</field>
+            <field name="category_id" ref="module_category_crm" />
+        </record>    
+  </data>
+
+
+ <data noupdate="1">
+
+        <delete model="ir.rule" id="crm.crm_rule_personal_lead"/>
+        <delete model="ir.rule" id="crm.crm_rule_all_lead"/>
+
+        <record id="crm_rule_personal_lead" model="ir.rule">
+            <field name="name">CRM Personal Leads</field>
+            <field ref="crm.model_crm_lead" name="model_id"/>
+            <field name="domain_force">['|',('user_id', '=', user.id),('message_is_follower','=',1)]</field>
+            <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+        </record>
+
+        <record id="crm_rule_open_data_sale" model="ir.rule">
+            <field name="name">CRM Sale xem data mở</field>
+            <field ref="crm.model_crm_lead" name="model_id"/>
+            <field name="domain_force">[('user_id','=',False)]</field>
+            <field name="groups" eval="[(4, ref('bissweb.group_crm_sale_open_data_user'))]"/>
+        </record>
+
+        <record id="crm_rule_all_lead" model="ir.rule">
+            <field name="name">CRM All Leads</field>
+            <field ref="crm.model_crm_lead" name="model_id"/>
+            <field name="domain_force">['|','|','|','|',('user_id', '=',user.id),('user_id','=',False),('team_id.user_id', '=',user.id),('team_id.member_ids', '=',user.id),('message_is_follower','=',1)]</field>
+            <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
+        </record>
+
+        <record id="rule_dss_marketing" model="ir.rule">
+            <field name="name">DSS CRM Marketing</field>
+            <field name="model_id" ref="model_crm_lead" />
+            <field name="groups" eval="[(4, ref('bissweb.group_crm_marketing_user'))]" />
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+
+        <record id="rule_dss_doitac" model="ir.rule">
+            <field name="name">DSS CRM Đối tác</field>
+            <field name="model_id" ref="model_crm_lead" />
+            <field name="groups" eval="[(4, ref('bissweb.group_crm_doitac_user'))]" />
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+
+        <!-- <record id="rule_admin_sale" model="ir.rule">
+            <field name="name">CRM Admin Sale</field>
+            <field name="model_id" ref="model_crm_lead" />
+            <field name="groups" eval="[(4, ref('bissweb.admin_sale_crm'))]" />
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record> -->
+        
+        <menuitem
+            id="crm.crm_menu_sales"
+            name="Cơ hội"
+            parent="crm.crm_menu_root"
+            groups="bissweb.group_crm_teamsale_user,bissweb.group_crm_user"
+            sequence="1"/>
+ 
+        <menuitem
+            id="crm.crm_opportunity_report_menu"
+            name="Pipeline"
+            parent="crm.crm_menu_report"
+            groups="bissweb.group_crm_teamsale_user,bissweb.group_crm_user"/>
+
+        <menuitem
+            id="crm.crm_menu_forecast"
+            name="Forecast"
+            parent="crm.crm_menu_report"
+            groups="bissweb.group_crm_teamsale_user,bissweb.group_crm_user"/>
+
+        <delete model="ir.ui.menu" id="crm.crm_menu_leads" />
+
+        <menuitem
+            id="crm.crm_menu_leads"
+            name="Leads"
+            parent="crm.crm_menu_root"
+            action="crm.crm_lead_all_leads"
+            groups="bissweb.admin_sale_crm"
+            sequence="5"/>    
+
+        <record id="rule_hr_employee_inherit" model="ir.rule">
+            <field name="name">Hr Employee inherit</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="groups" eval="[(4, ref('bissweb.group_qlhr_employee'))]" />
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+    </data> 
+</odoo>
+

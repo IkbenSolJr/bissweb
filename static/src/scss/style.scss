@@ -1,0 +1,65 @@
+.page {
+  margin: 0 10%;
+}
+
+.o_form_view.o_form_editable .o_address_format .o_address_city {
+    width: 100% !important;
+  }
+  .o_list_view .custom-checkbox:not(.o_boolean_toggle) {
+    top: auto !important;
+  }
+  .o_web_client input, .o_web_client textarea, .o_web_client select {
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid #e9ecef;
+  }
+  body {
+    font-family: "Roboto";
+}
+.o_input {
+  border: 1px solid #e9ecef;
+  border-top-style: none;
+  border-right-style: none;
+  border-left-style: none;
+}table {
+  border-collapse: separate;
+  text-indent: initial;
+  border-spacing: 2px;
+}
+
+.bg-white {
+    padding: 25px;
+}
+
+@media (min-width: 1200px) {
+.o_web_client.o_chatter_position_sided .o_action_manager .o_content .o_inner_group .o_td_label, .o_web_client.o_chatter_position_sided .o_action_manager .modal-content .o_inner_group .o_td_label {
+    min-width: 160px !important;
+}
+}
+@media (min-width: 768px){
+.o_list_view .custom-checkbox:not(.o_boolean_toggle) .custom-control-label::before, .o_settings_container .o_setting_box .custom-checkbox:not(.o_boolean_toggle) .custom-control-label::before {
+    width: 1.4rem;
+    height: 1.4rem;
+    cursor: pointer;
+}
+.o_list_view .custom-checkbox:not(.o_boolean_toggle) .custom-control-label::after, .o_settings_container .o_setting_box .custom-checkbox:not(.o_boolean_toggle) .custom-control-label::after {
+  width: 1.4rem;
+  height: 1.4rem;
+  cursor: pointer;
+}
+}
+
+.o_data_row.text-info {
+  color: green !important
+}
+.o_data_row.text-warning {
+  color: orange !important
+}
+.o_data_row.text-warning {
+  color: red !important;
+  font-weight: bold;
+}
+
+.o_data_row.text-success {
+  color: blue !important
+}

@@ -1,0 +1,463 @@
+<odoo>
+    <data>
+
+      <template id="form_templates" name="Custom Form">
+        <t t-call="website.layout">
+            <div class="container">
+                <form action="/submit_lead_form" method="post" enctype="multipart/form-data">
+                <style>
+                form label {
+                font-weight: 500;
+                }                
+                </style>
+                <br/>
+                      <h2 style="text-align: center;font-weight: bold;">FORM THÔNG TIN KHÁCH HÀNG</h2> 
+                      <h4 style="text-align: center;font-weight: bold;">  DÙNG KHAI FORM THÔNG TIN VISA/DU HỌC </h4>
+   
+                       <span style="font-style: italic;">Lưu ý: Anh/chi Vui lòng điền thông tin chi tiết, trung thực, để nhận được kết quả đánh giá thẩm định hồ sơ chuẩn xác chi tiết từ luật sư di trú về: lộ trình công việc, chương trình visa phù hợp với năng lực và nguyện vọng ứng viên, tỷ lệ thành công visa...</span>
+                        <br/>
+                        <br/>
+                    <div class="canhan"><h4 style="font-weight: bold;">Thông tin cơ bản</h4></div>
+                    <input type="hidden" name="lead_id" t-att-value="lead.id"/>
+                    <div class="form-group">                        
+                        <label for="name">1. Họ và tên (Đương đơn)(bắt buộc)</label>
+                        <input type="text" id="name" name="name" t-att-value="lead.lead_form_id.name or ''" required="true" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="quoctich">2. Quốc tịch</label>
+                        <input type="text" name="quoctich" t-att-value="lead.quoctich or ''" class="form-control"/>
+                    </div>  
+                    <div class="form-group">
+                        <label for="gioitinh">3. Giới tính</label>
+                         <select name="gioitinh" t-att-value="lead.gioitinh or ''" class="form-control">
+                            <option value="">Chọn giới tính</option>                        
+                            <option value="nam" t-att-selected="'nam' == lead.gioitinh">Nam</option>
+                            <option value="nu" t-att-selected="'nu' == lead.gioitinh">Nữ</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="namsinhnd">4. Ngày tháng năm sinh</label>
+                        <input type="text" name="namsinhnd" t-att-value="lead.namsinhnd or ''" class="form-control"/>
+                    </div>
+                    <!-- Uncommented code for email and phone fields -->
+                    <div class="form-group">
+                        <label for="email">5. Địa chỉ Email (bắt buộc)</label>
+                        <input type="text" id="email" name="email" t-att-value="lead.email or ''" class="form-control"/>
+                    </div> 
+                     <div class="form-group">
+                        <label for="phone">6. Số điện thoại (bắt buộc)</label>
+                        <input type="text" id="phone" name="phone" t-att-value="lead.phone or ''" required="true" class="form-control"/>
+                    </div>        
+                    <div class="form-group">
+                        <label for="hkthuongtru">7. Hộ khẩu thường trú (Quê quán)</label>
+                        <textarea name="hkthuongtru" t-esc="lead.hkthuongtru  or ''" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="noio">8. Nơi ở hiện tại</label>
+                        <textarea name="noio" t-esc="lead.noio or ''" class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tinhtranghn">9. Tình trạng hôn nhân (Độc thân/ Đã có gia đình/ Đã ly hôn) – Ghi rõ:<br/>
+                        Số con/ Năm sinh (Nếu có)<br/>
+                        Năm kết hôn/ly hôn (Nếu có)
+                        </label>
+                        <textarea name="tinhtranghn" t-esc="lead.tinhtranghn or ''" class="form-control"></textarea>
+                    </div>
+
+                    <div class="canhan"><h4 style="font-weight: bold;">Nguyện vọng của đương đơn</h4></div>
+                    <div class="form-group">
+                        <!-- <label for="nguyenvongdd">Nguyện vọng của đương đơn</label> -->
+                        <textarea name="nguyenvongdd" t-esc="lead.nguyenvongdd or ''" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="nhucau">1. Hình thức mong muốn (Du lịch, du học, lao động, định cư, đầu tư,..)</label>
+                        <textarea name="nhucau" t-esc="lead.nhucau or ''" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="visa">2. Loại Visa</label>
+                         <select name="visa" class="form-control">
+                            <option value="">Chọn loại Visa</option>
+                            <option value="482" t-att-selected="'482' == lead.visa">482</option>
+                            <option value="482dama" t-att-selected="'482dama' == lead.visa">482 DAMA</option>
+                            <option value="462" t-att-selected="'462' == lead.visa">462</option>
+                            <option value="500" t-att-selected="'500' == lead.visa">500</option>
+                            <option value="600" t-att-selected="'600' == lead.visa">600</option>
+                            <option value="186" t-att-selected="'186' == lead.visa">186</option>
+                            <option value="186dama" t-att-selected="'186dama' == lead.visa">186 DAMA</option>
+                            <option value="403" t-att-selected="'403' == lead.visa">403</option>
+                            <option value="407" t-att-selected="'407' == lead.visa">407</option>
+                            <option value="494" t-att-selected="'494' == lead.visa">494</option>
+                            <option value="dubai" t-att-selected="'dubai' == lead.visa">Dubai</option>
+                            <option value="caworkpermit" t-att-selected="'caworkpermit' == lead.visa">Canada Work Permit</option>
+                            <option value="ca" t-att-selected="'ca' == lead.visa">Canada</option>
+                            <option value="uc" t-att-selected="'uc' == lead.visa">Úc</option>
+                            <option value="nz" t-att-selected="'nz' == lead.visa">NZ</option>
+                            <option value="laodong" t-att-selected="'laodong' == lead.visa">Lao động</option>
+                            <option value="dulich" t-att-selected="'dulich' == lead.visa">Du lịch</option>
+                            <option value="khac" t-att-selected="'khac' == lead.visa">Khác</option>
+                        </select>
+                    </div>
+                     <div class="form-group">
+                        <label for="quocgiabook">3. Quốc gia</label>
+                         <select name="quocgiabook" class="form-control">
+                            <option value="">Chọn quốc gia</option>
+                            <option value="uc" t-att-selected="'uc' == lead.quocgiabook">Úc</option>
+                            <option value="canada" t-att-selected="'canada' == lead.quocgiabook">Canada</option>
+                            <option value="newzealand" t-att-selected="'newzealand' == lead.quocgiabook">New Zealand</option>
+                            <option value="dubai" t-att-selected="'dubai' == lead.quocgiabook">Dubai</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nghebooking">4. Ngành nghề ứng viên muốn được hỗ trợ thẩm định lộ trình dự kiến</label>
+                         <select name="nghebooking" class="form-control">
+                            <option value="">Chọn ngành nghề</option>
+                            <option value="bep" t-att-selected="'bep' == lead.nghebooking">Bếp</option>
+                            <option value="farm" t-att-selected="'farm' == lead.nghebooking">Farm</option>
+                            <option value="thit" t-att-selected="'thit' == lead.nghebooking">Thịt</option>
+                            <option value="holy" t-att-selected="'holy' == lead.nghebooking">Hộ lý</option>
+                            <option value="xaydung" t-att-selected="'xaydung' == lead.nghebooking">Xây dựng</option>
+                            <option value="chebienthit" t-att-selected="'chebienthit' == lead.nghebooking">Chế biến thịt</option>
+                            <option value="oto" t-att-selected="'oto' == lead.nghebooking">Ô tô</option>
+                            <option value="adgecare" t-att-selected="'adgecare' == lead.nghebooking">Aged Care</option>
+                            <option value="hair" t-att-selected="'hair' == lead.nghebooking">Hair</option>
+                            <option value="thohancokhi" t-att-selected="'thohancokhi' == lead.nghebooking">Thợ hàn, Cơ khí</option>
+                            <option value="nhahang" t-att-selected="'nhahang' == lead.nghebooking">Nhà hàng khách sạn</option>
+                            <option value="thomoc" t-att-selected="'thomoc' == lead.nghebooking">Thợ mộc</option>
+                            <option value="tapvu" t-att-selected="'tapvu' == lead.nghebooking">Tạp vụ</option>
+                            <option value="ketoan" t-att-selected="'ketoan' == lead.nghebooking">Kế toán</option>
+                            <option value="duhoc" t-att-selected="'duhoc' == lead.nghebooking">Du học</option>
+                            <option value="khac" t-att-selected="'khac' == lead.nghebooking">Nghề khác</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nguoithan">5. Ứng viên có người thân hỗ trợ công việc/ nhà ở tại quốc gia mình mong muốn hay không ?
+                        Mô tả nếu có:<br/>
+                        Mối quan hệ - Visa – tình trạng hợp pháp hoặc bất hợp pháp – nơi sinh sống tại quốc gia đó
+                        </label>
+                        <textarea name="nguoithan" t-esc="lead.nguoithan or ''" class="form-control"></textarea>
+                    </div>
+                     <div class="canhan"><h4 style="font-weight: bold;">Năng lực ứng viên (đương đơn)</h4></div>
+                      <div class="canhan"><span style="font-weight: bold;">Trình độ học vấn – tay nghề</span></div>
+
+                    <div class="form-group">
+                        <label for="chungchitaynghe">1. Các chứng chỉ nghiệp vụ tay nghề: Bếp/ Làm đẹp/ Cơ khí/ Khác...(nếu có)
+                        </label>
+                        <input type="text" name="chungchitaynghe" t-att-value="lead.chungchitaynghe or ''" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="bangcap">2. Bằng cấp cao nhất từng có<br/>
+                        (Tiểu học/THCS/THPT/CĐ/ ĐH...) </label>                       
+                        <select name="bangcap" class="form-control">
+                            <option value="">Chọn thông tin</option>
+                            <option value="tieuhoc" t-att-selected="'tieuhoc' == lead.bangcap">Tiểu học</option>
+                            <option value="thcs" t-att-selected="'thcs' == lead.bangcap">THCS</option>
+                            <option value="thpt" t-att-selected="'thpt' == lead.bangcap">THPT</option>
+                            <option value="trungcap" t-att-selected="'trungcap' == lead.bangcap">Trung cấp</option>
+                            <option value="caodang" t-att-selected="'caodang' == lead.bangcap">Cao đẳng</option>
+                            <option value="daihoc" t-att-selected="'daihoc' == lead.bangcap">Đại học</option>
+                        </select>
+                    </div>
+                      <div class="form-group">
+                        <label for="chuyennganh">3. Chuyên môn ngành nghề (theo bằng cấp)</label>
+                        <input type="text" name="chuyennganh" t-att-value="lead.chuyennganh or ''" class="form-control"/>
+                    </div>
+                    <!--<div class="form-group">
+                        <label for="truongcap">4. Trường cấp bằng</label>
+                        <input type="text" name="truongcap" t-att-value="lead.truongcap or ''" class="form-control"/>
+                    </div> -->
+                      <div class="form-group">
+                        <label for="namtotnghiep">4. Năm tốt nghiệp</label>
+                        <input type="text" name="namtotnghiep" t-att-value="lead.namtotnghiep or ''" class="form-control"/>
+                    </div>
+                    <div class="canhan"><span style="font-weight: bold;">Trình độ tiếng Anh</span></div>
+
+                    <div class="form-group">
+                        <label for="tienganh">1. Trình độ hiện tại (tự đánh giá hoặc đã từng kiểm tra đầu vào trước đây): (Chưa có/ căn bản/ trung cấp/ khá/ giỏi)</label>
+                        <select name="tienganh" class="form-control">
+                            <option value="">Chọn thông tin</option>
+                            <option value="khong" t-att-selected="'khong' == lead.tienganh">Không</option>
+                            <option value="coban" t-att-selected="'coban' == lead.tienganh">Cơ bản</option>
+                            <option value="giaotiep" t-att-selected="'giaotiep' == lead.tienganh">Giao tiếp</option>
+                            <option value="ie34pte23" t-att-selected="'ie34pte23' == lead.tienganh">Ielts 3.0-4.0/ PTE 23+</option>
+                            <option value="ie45pte29" t-att-selected="'ie45pte29' == lead.tienganh">Ielts 4.0-5.0 /PTE 29+</option>
+                            <option value="ie56pte36" t-att-selected="'ie56pte36' == lead.tienganh">Ielts 5.0-6.0 / PTE 36+</option>
+                            <option value="ie6pte46" t-att-selected="'ie6pte46' == lead.tienganh">Ielts trên 6.0 / PTE 46+</option>
+                        </select>
+                    </div>
+                     <div class="form-group">
+                        <label for="chungchita">2. Bằng cấp tiếng anh và điểm số (nếu có): (PTE/ IELTS,..)</label>
+                        <input type="text" name="chungchita" t-att-value="lead.chungchita or ''" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="namcapccta">3. Năm cấp bằng</label>
+                        <input type="text" name="namcapccta" t-att-value="lead.namcapccta or ''" class="form-control"/>
+                    </div>
+                    <div class="canhan"><h4 style="font-weight: bold;">Kinh nghiệm làm việc: (Từ lúc 18 tuổi đến nay)
+                        Bao gồm công việc part time hoặc full time. Ứng viên có thể thay thế nội dung thông tin bằng CV mô tả chi tiết, đính kèm vào form thông tin này</h4></div>
+                    <div class="canhan"><span style="font-weight: bold;">I. Công việc hiện tại (Vị trí trên HĐLĐ nếu có)</span></div>
+
+                    <div class="form-group">
+                        <!-- <label for="congviecht">Công việc hiện tại</label> -->
+                        <textarea name="congviecht" t-esc="lead.congviecht or ''" class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tendoanhnghiepht">1. Tên công ty và lĩnh vực hoạt động<br/>
+                        (Link website/ MST thuế nếu có)
+                        </label>
+                        <textarea name="tendoanhnghiepht" t-esc="lead.tendoanhnghiepht or ''" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="thoigianlamht">2. Thời gian công tác</label>
+                        <input type="text" name="thoigianlamht" t-att-value="lead.thoigianlamht or ''" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="kinhnghiemht">3. Chứng minh kinh nghiệm (Có HĐLĐ, BHXH, xác nhận lương chuyển khoản từ công ty hay không ?,...)</label>
+                        <textarea name="kinhnghiemht" t-esc="lead.kinhnghiemht or ''" class="form-control"></textarea>
+                    </div>
+                  
+                    <div class="canhan"><span style="font-weight: bold;">II. Các công việc trước đây (trong 5 đến 10 năm gần nhất) (nếu có)</span></div>
+                    
+                      <div class="form-group">
+                        <!-- <label for="congviecht">Công việc hiện tại</label> -->
+                        <textarea name="congviectruocday" t-esc="lead.congviectruocday or ''" class="form-control"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tendoanhnghiep">1. Tên công ty và lĩnh vực hoạt động<br/>
+                        (Link website/ MST thuế nếu có)
+                        </label>
+                        <textarea name="tendoanhnghiep" t-esc="lead.tendoanhnghiep or ''" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="thoigianlam">2. Thời gian công tác</label>
+                        <input type="text" name="thoigianlam" t-att-value="lead.thoigianlam or ''" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="kinhnghiem">3. Chứng minh kinh nghiệm (Có HĐLĐ, BHXH, xác nhận lương chuyển khoản từ công ty hay không ?,...)</label>
+                        <textarea name="kinhnghiem" t-esc="lead.kinhnghiem or ''" class="form-control"></textarea>
+                    </div>
+
+                    <div class="canhan"><span style="font-weight: bold;">Tiểu sử di trú (Ứng viên có thể thay thế nội dung thông tin dưới đây bằng đơn nộp visa cũ)</span></div>
+
+                    <div class="form-group">
+                        <label for="capvisadulichvfs">1. Ứng viên đã từng được cấp hoặc bị từ chối visa du lịch trong khối VFS hay không ?
+                        (Úc, Canada, New Zealand, Mỹ, Anh Quốc)
+                        Mô tả nếu có: <br/>
+                        Quốc gia – năm cấp visa – thời hạn visa – hợp pháp/ bất hợp pháp
+                        </label>
+                        <textarea name="capvisadulichvfs" t-esc="lead.capvisadulichvfs or ''" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="capvisalaodongvfs">2. Ứng viên đã từng được cấp hoặc bị từ chối visa lao động trong khối VFS hay không ?
+                        (Úc, Canada, New Zealand, Mỹ, Anh Quốc)
+                        Mô tả nếu có: <br/>
+                        Quốc gia – năm cấp visa – thời hạn visa – hợp pháp/ bất hợp pháp
+                        </label>
+                        <textarea name="capvisalaodongvfs" t-esc="lead.capvisalaodongvfs or ''" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="capvisaqgkhac">3. Ứng viên đã từng được cấp hoặc bị từ chối visa du lịch/ lao động,.. trong các quốc gia khác hay không ?
+                        (Châu âu, Hàn Quốc, Nhật Bản, Đài Loan,...)
+                        Mô tả nếu có:  <br/>
+                        Quốc gia – năm cấp visa – thời hạn visa – hợp pháp/ bất hợp pháp
+                        </label>
+                        <textarea name="capvisaqgkhac" t-esc="lead.capvisaqgkhac or ''" class="form-control"></textarea>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="caplaivisa">4. Đương đơn/gia đình có đang nộp/chờ kết quả visa không? 
+                        Mô tả nếu có: <br/>
+                        Loại visa – Quốc gia – Thời gian nộp hồ sơ
+                        </label>
+                        <textarea name="caplaivisa" t-esc="lead.caplaivisa or ''" class="form-control"></textarea>
+                    </div>
+                        <div class="form-group">
+                        <label for="tuchoivisagd">Bố/ mẹ/ anh chị em/Chồng con đã từng được cấp hoặc bị từ chối visa vào nước nào?
+                        Mô tả nếu có:<br/>
+                        Loại visa – Quốc gia – Thời gian nộp hồ sơ
+                        </label>
+                        <textarea name="tuchoivisagd" t-esc="lead.tuchoivisagd or ''" class="form-control"></textarea>
+                    </div> -->
+
+                    <div class="canhan"><span style="font-weight: bold;">Lý lịch tư pháp (Có hoặc không)</span></div>
+
+                    <div class="form-group">
+                        <label for="phamphap">Đương đơn hoặc người thân gia đình đã từng bị phạt hoặc kết án về tội danh nào hay chưa ?
+                        (Án treo, án tù, phạt hành chính, xóa án tích,...)
+                        </label>
+                        <input type="text" name="phamphap" t-att-value="lead.phamphap or ''" class="form-control"/>
+                    </div>
+                    <div class="canhan"><span style="font-weight: bold;">Tình trạng sức khỏe</span></div>
+
+                    <div class="form-group">
+                        <label for="suckhoe">Đương đơn có vấn đề về sức khỏe các bệnh truyền nhiễm ảnh hưởng đến vấn đề xuất nhập cảnh với visa lao động như: Viêm gan, Lao phổi, HIV,...
+                        Mô tả nếu có: <br/>
+                        Tình trạng điều trị - Giấy xác nhận sức khỏe từ bác sỹ
+                        </label>
+                        <textarea name="suckhoe" t-esc="lead.suckhoe or ''" class="form-control"></textarea>
+                    </div>
+
+                    <div class="canhan">
+                        <span style="font-weight: bold;">Chứng minh từ tài chính gia đình(Chỉ áp dụng với Khách hàng có nhu cầu Du học)</span></div>
+
+                    <!--<div class="form-group">
+                        <label for="nguoitaitro_dh">1. Người bảo trợ tài chính (Ba, mẹ, người thân,…)</label>
+                        <input type="text" name="nguoitaitro_dh" t-att-value="lead.nguoitaitro_dh or ''" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="luongthangdd_dh">2. Lương thực nhận hàng tháng của đương đơn</label>
+                        <input type="text" name="luongthangdd_dh" t-att-value="lead.luongthangdd_dh or ''" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="luongthangpt_dh">3. Lương thực nhận hàng tháng của người phụ thuộc (nếu có)</label>
+                        <input type="text" name="luongthangpt_dh" t-att-value="lead.luongthangpt_dh or ''" class="form-control"/>
+                    </div>
+                      <div class="form-group">
+                        <label for="thunhapbds_dh">4. Thu nhập khác từ cho thuê nhà đất, xe hơi, tàu, thuyền; đầu tư chứng khoán,...</label>
+                        <input type="text" name="thunhapbds_dh" t-att-value="lead.thunhapbds_dh or ''" class="form-control"/>
+                    </div> -->
+                    <div class="form-group"> 
+                        <label for="sotk_dh">1. Sổ tiết kiệm (Giá trị tài sản, thời hạn sổ tiết kiệm)</label>
+                        <input type="text" name="sotk_dh" t-att-value="lead.sotk_dh or ''" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="tsbds_dh">2. Tài sản nhà/ đất và tổng giá trị theo thị trường (Đứng tên đương đơn hoặc người phụ thuộc)</label>
+                        <input type="text" name="tsbds_dh" t-att-value="lead.tsbds_dh or ''" class="form-control"/>
+                    </div>
+                    <div class="canhan"><h4 style="font-weight: bold;">Chứng minh tài chính đương đơn/ Người phụ thuộc</h4></div>
+                    <div class="canhan">
+                        <span style="font-weight: bold;">I. Dành cho đương đơn là người đi làm</span>
+                    </div>
+                    <!--
+                    <div class="form-group">
+                        <label for="luongthang">1. Lương thực nhận hàng tháng của đương đơn</label>
+                        <input type="text" name="luongthang" t-att-value="lead.luongthang or ''" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="luongthang_pt">2. Lương thực nhận hàng tháng của người phụ thuộc (nếu có)</label>
+                        <input type="text" name="luongthang_pt" t-att-value="lead.luongthang_pt or ''" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="thunhapbds">3. Thu nhập khác từ cho thuê nhà đất, xe hơi, tàu, thuyền; đầu tư chứng khoán,...</label>
+                        <input type="text" name="thunhapbds" t-att-value="lead.thunhapbds or ''" class="form-control"/>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="sotk">1. Sổ tiết kiệm (Giá trị tài sản, thời hạn sổ tiết kiệm)</label>
+                        <input type="text" name="sotk" t-att-value="lead.sotk or ''" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="tsbds">2. Tài sản nhà/ đất và tổng giá trị theo thị trường (Đứng tên đương đơn hoặc người phụ thuộc)</label>
+                        <input type="text" name="tsbds" t-att-value="lead.tsbds or ''" class="form-control"/>
+                    </div>
+                      <div class="canhan">
+                        <span style="font-weight: bold;">II. Dành cho đương đơn hoặc người phụ thuộc là chủ doanh nghiệp</span>
+                    </div>
+
+                       <div class="form-group">
+                        <label for="hinhthucdn">1.	Hình thức doanh nghiệp hoạt động (kinh doanh cá thể/ hộ gia đình, công ty cổ phần, TNHH,...)</label>
+                        <input type="text" name="hinhthucdn" t-att-value="lead.hinhthucdn or ''" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="dongthuedn">2.	Có đóng thuế đầy đủ hay không?</label>
+                        <select name="dongthuedn" class="form-control">
+                            <option value="">Chọn trả lời</option>
+                            <option value="co" t-att-selected="'co' == lead.dongthuedn">Có</option>
+                            <option value="khong" t-att-selected="'khong' == lead.dongthuedn">Không</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="giayphepkddn">3. Có giấy phép kinh doanh hay không?</label>
+                        <select name="giayphepkddn" class="form-control">
+                            <option value="">Chọn trả lời</option>
+                            <option value="co" t-att-selected="'co' == lead.giayphepkddn">Có</option>
+                            <option value="khong" t-att-selected="'co' == lead.giayphepkddn">Không</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mst_webdn">4. Link website hoặc mã số thuế (nếu có)</label>
+                        <input type="text" name="mst_webdn" t-att-value="lead.mst_webdn or ''" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="thunhapbdsdn">5. Thu nhập khác từ cho thuê nhà đất, xe hơi, tàu, thuyền; đầu tư chứng khoán,...</label>
+                        <input type="text" name="thunhapbdsdn" t-att-value="lead.thunhapbdsdn or ''" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="sotkdn">6. Sổ tiết kiệm (Giá trị tài sản, thời hạn sổ tiết kiệm)</label>
+                        <input type="text" name="sotkdn" t-att-value="lead.sotkdn or ''" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="bdsdn">7. Tài sản nhà/ đất và tổng giá trị theo thị trường (Đứng tên đương đơn hoặc người phụ thuộc)</label>
+                        <input type="text" name="bdsdn" t-att-value="lead.bdsdn or ''" class="form-control"/>
+                    </div>
+                    <div class="canhan">
+                        <span style="font-weight: bold;">III. Phần dành cho người phụ thuộc</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name_npt">1. Họ và tên (người phụ thuộc)</label>
+                        <input type="text" name="name_npt" t-att-value="lead.name_npt or ''" class="form-control"/>
+                    </div>
+                     <div class="form-group">
+                        <label for="namsinh_npt">2. Ngày tháng năm sinh</label>
+                        <input type="text" name="namsinh_npt" t-att-value="lead.namsinh_npt or ''" class="form-control"/>
+                    </div>
+                     <div class="form-group">
+                        <label for="bangcap_npt">3. Bằng cấp cao nhất từng có</label>
+                        <input type="text" name="bangcap_npt" t-att-value="lead.bangcap_npt or ''" class="form-control"/>
+                    </div>
+                     <div class="form-group">
+                        <label for="cvht_npt">4. Công việc hiện tại</label>
+                        <input type="text" name="cvht_npt" t-att-value="lead.cvht_npt or ''" class="form-control"/>
+                    </div>
+                     <div class="form-group">
+                        <label for="tienganh_npt">5. Trình độ tiếng Anh</label>
+                        <input type="text" name="tienganh_npt" t-att-value="lead.tienganh_npt or ''" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="file">Tải lên CV (Chỉ hỗ trợ định dạng: JPG, PNG, PDF và Giới hạn 5MB)</label>
+                        <input type="file" id="file" name="file" accept=".jpg,.png,.pdf" class="form-control"/>
+                    </div>
+                       <input type="hidden" name="close_form" value="true"/>
+
+                    
+                    <button type="submit" class="btn btn-primary">Gửi thông tin</button>
+                    <br/>
+                    <br/>
+                </form>
+
+            </div>
+        </t>
+    </template>
+
+    <template id="custom_form_thankyou_template" name="Custom Form - Thank You">  
+        <t t-call="website.layout">
+            <div class="container" style="text-align: center;">
+               <br/>
+                    <br/>
+                <h2 style="font-family: 'Roboto';">Cảm ơn bạn đã điền form!</h2>
+                <a href="https://dsseducation.com/" class="btn btn-primary btn_cta">Tìm kiếm thêm thông tin từ DSS Group!</a>
+            </div>
+        </t>
+    </template>
+
+    
+    <template id="custom_form_no_lead" name="Gặp vấn viên">  
+        <t t-call="website.layout">
+            <div class="container" style="text-align: center;">
+               <br/>
+                    <br/>
+                <h2 style="font-family: 'Roboto';">Bạn vui lòng liên hệ tới Tư vấn để được hỗ trợ!</h2>
+                <a href="https://dsseducation.com/" class="btn btn-primary btn_cta">Tìm kiếm thêm thông tin từ DSS Group!</a>
+            </div>
+        </t>
+    </template>
+
+     <template id="error_template" name="Error Template">
+        <h2>Error</h2>
+        <p t-esc="error_message"></p>
+        <a href="/form_custumer" class="btn btn-primary btn_cta">Go back to the form</a>
+    </template>
+   
+    </data>
+</odoo>

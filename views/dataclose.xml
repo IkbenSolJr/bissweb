@@ -1,0 +1,129 @@
+
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="dataclose_view_tree">
+      <field name="name">crm.lead.dataclose.tree</field>
+      <field name="model">crm.lead</field>
+      <field name="priority">4</field>
+      <field name="arch" type="xml" >
+        <tree string="Khách hàng tiềm năng(Lead)" sample="1" multi_edit="1" export_xlsx="false" delete="false" decoration-info="color_data == 'xanh'" decoration-warning="color_data == 'vang'" decoration-danger="color_data == 'do'" decoration-success="danhgiakh == 'tiemnang' or danhgiakh == 'lenhopdongmau' or danhgiakh == 'kyhd' or danhgiakh == 'hot'">
+                  <field name="name" string="Khách hàng(lead)"/> 
+                  <field name="ngaynhap" optional="show"/> 
+                   <field name="write_date" string="Cập nhật cuối" widget="date" optional="hide"/>
+                  <field name="phone" optional="show" class="o_force_ltr"/>
+                  <field name="mobile" optional="hide"/>
+                  <field name="email_from" optional="show"/>
+                  <field name="nhucau" optional="show"/> 
+                   <field name="trangthaidt" optional="show"/>                    
+                  <field name="lifecyclemql" optional="show"/> 
+                  <field name="nghebooking" optional="hide"/> 
+                  <field name="quocgiabook" optional="show"/>
+                  <field name="adsdss" optional="hide"/> 
+                  <field name="hocvan" optional="hide"/>
+                  <field name="trinhdo" optional="hide"/>
+                  <field name="trinhdotienganh" optional="hide"/>
+                  <field name="tienganh" optional="hide"/>                  
+                  <field name="noio" optional="hide"/>
+                  <field name="nghenghiep" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                  <field name="taichinh" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                  <field name="hopdong" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                  <field name="visa" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                  <field name="danhgiakh" optional="show" groups="bissweb.group_crm_teamsale_user"/>
+                  <field name="namsinh" optional="hide"/>
+                  <field name="sinhnhat" optional="hide" groups="bissweb.group_crm_teamsale_user"/>
+                  <field name="nguondt" optional="hide"/>
+                  <!-- <field name="nguondoitac" optional="hide" groups="bissweb.group_crm_teamsale_user"/> -->
+                  <field name="city" optional="show"/>
+                  <field name="state_id" optional="hide"/>
+                  <field name="country_id" optional="hide" options="{'no_open': True, 'no_create': True}"/>
+                  <field name="user_id" optional="show"  widget="many2one_avatar_user"
+                        domain="[('share', '=', False)]"/>
+                  <field name="team_id" optional="show"/>  
+                  <field name="company_id" groups="base.group_multi_company" invisible="1"/> 
+                  <field name="ngaychuyengiao" optional="hide"/>
+                  <field name="partner_id" invisible="1"/>
+                  <field name="tag_ids" optional="hide" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                  <field name="priority" optional="hide"/>   
+                  <field name="color_data" invisible="1"/>       
+                  <field name="loai_data" readonly="1" optional="hide"/> 
+                  <field name="color_data" invisible="1"/> 
+                  
+                  
+        </tree>
+      </field>
+    </record>
+
+
+<!-- 
+    <record id="dataclose_view_pivot" model="ir.ui.view">
+      <field name="name">crm.lead.dataclose.pivot</field>
+      <field name="model">crm.lead</field>
+      <field name="arch" type="xml">
+          <pivot string="dataclose" sample="1">
+              <field name="ngaynhap" interval="month" type="row"/>
+              <field name="nguondt" type="col"/>
+              <field name="nghebooking" />
+              <field name="quocgiabook" />
+          </pivot>
+      </field>
+    </record> -->
+
+    <!-- <record id="dataclose_view_graph" model="ir.ui.view">
+            <field name="name">crm.lead.dataclose.graph</field>
+            <field name="model">crm.lead</field>
+            <field name="arch" type="xml">
+                <graph string="Biểu đồ" sample="1">
+                    <field name="nguondt"/>
+                    <field name="nghebooking"/>
+                    <field name="quocgiabook" />
+                </graph>
+            </field>
+    </record> -->
+   <!-- actions opening views on models -->
+   
+    <record model="ir.actions.act_window" id="bissweb.dataclose_action_window">
+        <field name="name">Khách hàng tiềm năng(Lead)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">tree,kanban,graph,pivot,calendar,form,activity</field>
+        <field name="domain">[('type','=','lead'),('user_id','!=',False)]</field>
+        <field name="context">{
+                'default_type': 'lead',
+                'search_default_type': 'lead',
+                'mass_editing_enable': True
+            }</field>
+        <field name="search_view_id" ref="bissweb.crm_search_view_lead_inherit"/>
+    </record>
+
+    <record id="dataclose_action_view_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="dataclose_view_tree"/>
+            <field name="act_window_id" ref="bissweb.dataclose_action_window"/>
+    </record>
+
+    <!-- <record id="dataclose_action_view_pivot" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="dataclose_view_pivot"/>
+            <field name="act_window_id" ref="bissweb.dataclose_action_window"/>
+    </record> -->
+
+    <!-- <record id="dataclose_action_view_graph" model="ir.actions.act_window.view">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="dataclose_view_graph"/>
+            <field name="act_window_id" ref="bissweb.dataclose_action_window"/>
+    </record> -->
+
+<!-- Top menu item -->
+    <menuitem
+        id="bissweb.crm_menu_dataclose"
+        name="Leads đóng"
+        parent="crm.crm_menu_root"
+        action="bissweb.dataclose_action_window"
+        groups="bissweb.group_crm_teamsale_user"
+        sequence="9"/>
+  </data>
+</odoo>

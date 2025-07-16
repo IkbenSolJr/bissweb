@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data noupdate="1">
+      <record id="email_template_dss" model="mail.template">
+            <field name="name">[Đối tác] Thông báo</field>
+            <field name="subject">Thông báo từ DSS Group - {{ object.tendoitac }}</field>
+            <field name="model_id" ref="bissweb.model_doitac_crm"/>
+            <field name="email_from">{{ user.email }}</field>
+            <field name="email_to">{{ object.emaildoitac}}</field>
+            <field name="body_html" type="html">
+               <p>Kính gửi: Quý Đối tác/Khách hàng <strong>  <t t-out="object.tendoitac or ''"></t></strong></p>
+               <p> Công ty TNHH Du Học Định Cư DSS xin gửi Thông báo cho Quý khách</p>
+               <p>Vui lòng xem file đính kèm</p>
+               <p>Cảm ơn bạn đã hợp tác và chúc bạn học tập hiệu quả!</p>
+               <p>Trân trọng!</p>
+               <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 10px;">
+                  <tbody>
+                     <tr>
+                        <td valign="middle" align="left">
+                             <img t-attf-src="/digi_hr_plus/static/src/img/logo.png" alt="Dssedcuation Logo" style="padding: 0px; margin: 0px; height: auto; width: 90px;"/>
+                        </td>
+                        <td colspan="4" style="text-align:left;color: #2a2e6c;">
+                              <strong>CÔNG TY TNHH DU HỌC ĐỊNH CƯ DSS</strong><br/>
+                              <strong>Office Address:</strong> 534C Le Van Sy, Ward 14, District 3, Ho Chi Minh City<br/>
+                              <strong>Tel:</strong> 028 7303 9588 <br/>
+                              <strong>Website:</strong> https://dsseducation.com <br/>	
+                              <strong>Email:</strong> team@dsseducation.com<br/>
+                           </td>
+                        </tr>
+                     </tbody>
+               </table>
+             </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+   </data>
+</odoo>
+
+

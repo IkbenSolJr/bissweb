@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_crm_lead,crm.lead,model_crm_lead,bissweb.group_crm_user,1,1,1,0
+access_hr_employee,hr.employee,model_hr_employee,bissweb.group_qlhr_employee,1,1,1,0
+access_formreview_lead,formreview.lead,model_formreview_lead,,1,1,1,0
+access_doitac_crm,doitac.crm,model_doitac_crm,,1,1,1,1
