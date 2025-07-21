@@ -1,158 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data>
-<!-- Form CRM -->
-    <record id="crm_form_view_doitac" model="ir.ui.view">
+    <data>
+        <!-- Form CRM - Safe inheritance -->
+        <record id="crm_form_view_doitac" model="ir.ui.view">
             <field name="name">crm.lead.inherited.crm</field>
             <field name="model">crm.lead</field>
             <field name="inherit_id" ref="crm.crm_lead_view_form"/>
             <field name="arch" type="xml"> 
-               <xpath expr="//field[@name='trangthaidt']" position="after">              
-                <field name="doitac_id"/>
-              </xpath>
                 <xpath expr="//field[@name='user_id']" position="before">
                     <field name="doitac_id"/>
                 </xpath>
-
             </field>
-      </record>
-   <!--List CRM -->
-    <record id="crm_lead_view_tree" model="ir.ui.view">
-            <field name="name">crm.lead.tree.lead.inherit</field>
+        </record>
+
+        <!-- List CRM - Safe inheritance -->
+        <record id="crm_lead_view_tree_doitac" model="ir.ui.view">
+            <field name="name">crm.lead.tree.lead.inherit.doitac</field>
             <field name="model">crm.lead</field>
             <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
             <field name="arch" type="xml">
-              <xpath expr="//field[@name='trangthaidt']" position="after">              
-                <field name="doitac_id" optional="show"/>
-              </xpath>
+                <xpath expr="//field[@name='user_id']" position="after">              
+                    <field name="doitac_id" optional="show"/>
+                </xpath>
             </field>
-    </record>
+        </record>
 
-    <!-- Form đối tác -->
+        <!-- Form đối tác -->
+        <record id="doitac_crm_view_form" model="ir.ui.view">
+            <field name="name">doitac.crm.view.form</field>
+            <field name="model">doitac.crm</field>
+            <field name="arch" type="xml">
+                <form string="Thông tin đối tác">
+                    <header>
+                        <button name="action_send_email" type="object" string="Gửi Email" class="oe_highlight"/>
+                    </header> 
+                
+                    <sheet>
+                        <!-- BUTTON BOX -->
+                        <div class="oe_button_box" name="button_box">
+                            <!-- Widget Booking -->
+                            <button class="oe_stat_button" type="object" name="action_view_sale_booking" icon="fa-pencil-square-o">
+                                <div class="o_stat_info">
+                                    <field name="total_count_book" class="o_stat_value"/>
+                                    <span class="o_stat_text">Đặt Booking</span>
+                                </div>
+                            </button>
+                            
+                            <!-- Widget Review -->
+                            <button class="oe_stat_button" type="object" name="action_view_lead_review" icon="fa-credit-card">
+                                <div class="o_stat_info">
+                                    <field name="review_count" class="o_stat_value"/>
+                                    <span class="o_stat_text">Review</span>
+                                </div>
+                            </button>
+                            
+                            <!-- Widget Form -->
+                            <button class="oe_stat_button" type="object" name="action_view_form_lead" icon="fa-list-alt">
+                                <div class="o_stat_info">
+                                    <field name="form_count" class="o_stat_value"/>
+                                    <span class="o_stat_text">Chi tiết Form</span>
+                                </div>
+                            </button>
+                        </div>
 
-    <record id="doitac_crm_view_form" model="ir.ui.view">
-        <field name="name">doitac.crm.view.form</field>
-        <field name="model">doitac.crm</field>
-        <field name="arch" type="xml">
-            <form string="Thông tin đối tác">
-                <header>
-                    <button name="action_send_email" type="object" string="Gửi Email" class="oe_highlight"/>
-                </header> 
-            
-                <sheet>
-                    <group>
+                        <!-- Main fields -->
                         <group>
-                            <field name="madoitac"/> 
-                            <field name="trangthai"/> 
-                            <field name="phutrach_id"/>
-                            <field name="team_id"/>  
-                            <field name="nguoigioithieu"/> 
-                            <field name="facebook" widget="url"/>
-                            <field name="zalo"/>      
+                            <group>
+                                <field name="madoitac"/> 
+                                <field name="trangthai"/> 
+                                <field name="phutrach_id"/>
+                                <field name="team_id"/>  
+                                <field name="nguoigioithieu"/> 
+                                <field name="facebook" widget="url"/>
+                                <field name="zalo"/>      
+                            </group>
+                            <group>
+                                <field name="tendoitac"/> 
+                                <field name="diachidoitac"/> 
+                                <field name="dienthoai"/>
+                                <field name="emaildoitac"/>  
+                                <field name="lienhe"/>  
+                                <field name="thanhpho"/>
+                                <field name="total_count_lead"/>  
+                            </group>                        
                         </group>
-                        <group>
-                            <field name="tendoitac"/> 
-                            <field name="diachidoitac"/> 
-                            <field name="dienthoai"/>
-                            <field name="emaildoitac"/>  
-                            <field name="lienhe"/>  
-                            <field name="thanhpho"/>
-                            <field name="total_count_lead"/>  
-                        </group>                        
-                    </group>
-                    <notebook>
-                        <page name="lead_doitac" string="Khách hàng">     
-                             <field name="doitac_ids" nolabel="1">                    
-                                <tree delete="false">
-                                    <field name="name" string="Khách hàng"/> 
-                                    <field name="ngaynhap" optional="show"/> 
-                                    <field name="phone" optional="show" class="o_force_ltr"/>
-                                    <field name="email_from" optional="show"/>
-                                    <field name="nhucau" optional="show"/> 
-                                    <field name="trangthaidt" optional="show"/>                    
-                                    <field name="nghebooking" optional="hide"/>
-                                    <field name="visa" optional="hide"/>  
-                                    <field name="quocgiabook" optional="hide"/>
-                                    <field name="noio" optional="hide"/>
-                                     <field name="city" optional="show"/>
-                                </tree>
-                            </field>
-                        </page>
-                        <page string="Ghi chú">
-                             <field name="note"/>
-                        </page>
-                    </notebook>
-                  
-                </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
-                    <field name="message_ids" widget="mail_thread"/>
-                </div>
-            </form>
-        </field>
-    </record>
+                        
+                        <notebook>
+                            <page name="lead_doitac" string="Khách hàng">     
+                                <field name="doitac_ids" nolabel="1">                    
+                                    <tree delete="false">
+                                        <field name="name" string="Khách hàng"/> 
+                                        <field name="phone" optional="show" class="o_force_ltr"/>
+                                        <field name="email_from" optional="show"/>
+                                        <field name="city" optional="show"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Ghi chú">
+                                <field name="note"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
 
-    <record id="doitac_crm_tree_view" model="ir.ui.view">
-        <field name="name">doitac.crm.view.tree</field>
-        <field name="model">doitac.crm</field>
-        <field name="arch" type="xml">           
-            <tree string="Thông tin đối tác">
-                <header>
-                    <button name="action_send_email_tree" string="Gửi Email" type="object" class="btn-primary"/>    
-                </header>
+        <!-- Tree view -->
+        <record id="doitac_crm_tree_view" model="ir.ui.view">
+            <field name="name">doitac.crm.view.tree</field>
+            <field name="model">doitac.crm</field>
+            <field name="arch" type="xml">           
+                <tree string="Thông tin đối tác">
+                    <header>
+                        <button name="action_send_email_tree" string="Gửi Email" type="object" class="btn-primary"/>    
+                    </header>
                     <field name="madoitac" optional="show"/>
+                    <field name="tendoitac" optional="show"/>
                     <field name="trangthai" optional="show"/>
                     <field name="phutrach_id" optional="show"/> 
-                    <field name="team_id" optional="hide"/>                         
-                    <field name="nguoigioithieu" optional="show"/>
-                    <field name="tendoitac" optional="show"/>
-                    <field name="diachidoitac" optional="show"/>
                     <field name="dienthoai" optional="show"/>
                     <field name="emaildoitac" optional="show"/>  
-                    <field name="lienhe" optional="show"/>
-                    <field name="thanhpho" optional="show"/>
-                    <field name="facebook" optional="show"/>  
-                    <field name="zalo" optional="show"/>  
                     <field name="total_count_lead" optional="show"/>
-                    <field name="note" optional="show"/>                
-            </tree>
-        </field>
-    </record>
+                    <field name="total_count_book" string="Booking" optional="show"/>
+                    <field name="review_count" string="Review" optional="show"/>
+                    <field name="form_count" string="Forms" optional="show"/>
+                </tree>
+            </field>
+        </record>
 
+        <!-- Search -->
+        <record id="view_doitac_crm_filter" model="ir.ui.view">
+            <field name="name">doitac.crm.search</field>
+            <field name="model">doitac.crm</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="madoitac"/>
+                    <field name="tendoitac"/>                
+                    <field name="dienthoai"/>
+                    <field name="emaildoitac"/>
+                    <field name="lienhe"/>
+                    <field name="nguoigioithieu"/>
+                    <field name="zalo"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Phụ trách" name="phutrach_id" context="{'group_by':'phutrach_id'}"/>  
+                        <filter string="Team" name="team_id" context="{'group_by':'team_id'}"/>  
+                    </group>
+                </search>
+            </field>
+        </record>
 
-    <!-- Search -->
-    <record id="view_doitac_crm_filter" model="ir.ui.view">
-        <field name="name">doitac.crm.search</field>
-        <field name="model">doitac.crm</field>
-        <field name="arch" type="xml">
-            <search string="Search">
-                <field name="madoitac"/>
-                <field name="tendoitac"/>                
-                <field name="dienthoai"/>
-                <field name="emaildoitac"/>
-                <field name="lienhe"/>
-                <field name="nguoigioithieu"/>
-                <field name="zalo"/>
-                <group expand="0" string="Group By">
-                    <filter string="Phụ trách" name="phutrach_id" context="{'group_by':'phutrach_id'}"/>  
-                    <filter string="Team" name="team_id" context="{'group_by':'team_id'}"/>  
-                </group>
-            </search>
-        </field>
-    </record>
+        <!-- Action -->
+        <record id="doitact_crm_action" model="ir.actions.act_window">
+            <field name="name">Đối tác</field>
+            <field name="res_model">doitac.crm</field>
+            <field name="view_mode">tree,form</field>
+        </record>
 
-    <record id="doitact_crm_action" model="ir.actions.act_window">
-        <field name="name">Đối tác</field>
-        <field name="res_model">doitac.crm</field>
-        <field name="view_mode">tree,form</field>
-    </record>
+        <!-- Menu -->
+        <menuitem
+            id="doitac_crm_menu"
+            name="Đối tác"
+            parent="crm.crm_menu_root"
+            action="doitact_crm_action"
+            groups="bissweb.group_crm_doitac_user"
+            sequence="12"/>
 
-     <menuitem
-        id="doitac_crm_menu"
-        name="Đối tác"
-        parent="crm.crm_menu_root"
-        action="doitact_crm_action"
-        groups="bissweb.group_crm_doitac_user"
-        sequence="12"/>
-
-  </data>
+    </data>
 </odoo>
