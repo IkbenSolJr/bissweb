@@ -69,8 +69,28 @@ class bissweb(models.Model):
     nghenghiep = fields.Char(string="Nghề nghiệp")
     taichinh = fields.Char(string="Tài chính")
     hopdong = fields.Char(string="Tình trạng HĐ")
-    visa = fields.Selection([('482', '482'),('482dama', '482 DAMA'),('462', '462'),('500', '500'),('600', '600'),('186', '186'),('186dama', '186 DAMA'),('403', '403'),('407', '407'),('494', '494'),('dubai', 'Dubai'),('caworkpermit', 'Canada Work Permit'),('ca', 'Canada'),('uc', 'Úc'),('nz', 'NZ'),('laodong', 'Lao động'),('dulich', 'Du lịch'),('khac', 'Khác')], string="Loại Visa",track_visibility='onchange',default=False)
-    danhgiakh = fields.Selection([('tiemnang', 'Tiềm năng'),('khongtiemnang', 'Không tiềm năng'),('lenhopdongmau', 'Đã lên hợp đồng'),('hot', 'Hot'),('kyhd', 'Ký Hợp đồng')],string="Đánh giá KH",track_visibility='onchange',default=False)
+    #visa = fields.Selection([('482', '482'),('482dama', '482 DAMA'),('462', '462'),('500', '500'),('600', '600'),('186', '186'),('186dama', '186 DAMA'),('403', '403'),('407', '407'),('494', '494'),('dubai', 'Dubai'),('caworkpermit', 'Canada Work Permit'),('ca', 'Canada'),('uc', 'Úc'),('nz', 'NZ'),('laodong', 'Lao động'),('dulich', 'Du lịch'),('khac', 'Khác')], string="Loại Visa",track_visibility='onchange',default=False)
+    visa = fields.Selection([('482', '482'),
+                             ('482dama', '482 DAMA'),
+                             ('462', '462'),
+                             ('500', '500'),
+                             ('600', '600'),
+                             ('186', '186'),
+                             ('186dama', '186 DAMA'),
+                             ('403', '403'),
+                             ('407', '407'),
+                             ('494', '494'),
+                             ('dubai', 'Dubai'),
+                             ('caworkpermit', 'Canada Work Permit'),
+                             ('ca', 'Canada'),
+                             ('uc', 'Úc'),
+                             ('nz', 'NZ'),
+                             ('laodong', 'Lao động'),
+                             ('dulich', 'Du lịch'),
+                             ('khac', 'Khác')], 
+                             string="Loại Visa",track_visibility='onchange',default=False)
+    danhgiakh = fields.Selection([('tiemnang', 'Tiềm năng'),
+    ('khongtiemnang', 'Không tiềm năng'),('lenhopdongmau', 'Đã lên hợp đồng'),('hot', 'Hot'),('kyhd', 'Ký Hợp đồng')],string="Đánh giá KH",track_visibility='onchange',default=False)
     ngaychuyengiao = fields.Date(string='Ngày chuyển giao')
     nguondt = fields.Selection([('hotline', 'Hotline'),
                                 ('hotlinemn', 'Hotline Miền Nam'),
@@ -145,10 +165,7 @@ class bissweb(models.Model):
                                 string="Nghề booking", default=False)
     quocgiabook = fields.Selection([('uc', 'Úc'),
                                 ('canada', 'Canada'),
-                                ('newzealand', 'New Zealand'),
-                                ('dubai', 'Dubai'),
-                                ('ireland', 'Ireland'),
-                                ('balan', 'Ba Lan')], 
+                                ('ireland', 'Ireland')], 
                                 string="Quốc gia Book", default=False)
 
     noidungtele = fields.Text(string="Nội dung cuộc gọi Telesales")

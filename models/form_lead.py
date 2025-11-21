@@ -48,8 +48,7 @@ class FormLead(models.Model):
     visa = fields.Selection([('482', '482'),('482dama', '482 DAMA'),('462', '462'),('500', '500'),('600', '600'),('186', '186'),('186dama', '186 DAMA'),('403', '403'),('407', '407'),('494', '494'),('dubai', 'Dubai'),('caworkpermit', 'Canada Work Permit'),('ca', 'Canada'),('uc', 'Úc'),('nz', 'NZ'),('laodong', 'Lao động'),('dulich', 'Du lịch'),('khac', 'Khác')], string="Loại Visa",track_visibility='onchange',default=False)
     quocgiabook = fields.Selection([('uc', 'Úc'),
                                 ('canada', 'Canada'),
-                                ('newzealand', 'New Zealand'),
-                                ('dubai', 'Dubai')], 
+                                ('ireland', 'Ireland')], 
                                 string="Quốc gia Book", default=False)
     nghebooking = fields.Selection([('bep', 'Bếp'),
                                 ('farm', 'Farm'),
@@ -66,6 +65,30 @@ class FormLead(models.Model):
                                 ('tapvu', 'Tạp vụ'),
                                 ('ketoan', 'Kế toán'),
                                 ('duhoc', 'Du học'),
+                                ('nvkho','Nhân viên kho'),
+                                ('thone','Thợ nề'),
+                                ('nuoichongthuysan','Nhân viên nuôi trồng thủy hải sản'),
+                                ('nongtraisx','Nhân viên nông trại sản xuất'), 
+                                ('vanhanhmaynn','Nhân viên vận hành máy móc nông nghiệp'),
+                                ('suathanvooto','Sửa chữa thân vỏ ô tô'), 
+                                ('thohan','Thợ ốp lát, Thợ hàn'), 
+                                ('spalamdep','Quản lý Spa làm đẹp'), 
+                                ('thokythuat','Thợ kỹ thuật'), 
+                                ('thodienlanh','Thợ điện lạnh'),
+                                ('kientrucsu','Kiến trúc sư'), 
+                                ('nvbanle','Nhân viên bán lẻ'), 
+                                ('quantrictvada','Quản trị viên chương trình và dự án'),
+                                ('tuvanmkt','Quản lý nhân viên tư vấn và marketing'), 
+                                ('laptrinhvien','Lập trình viên'),
+                                ('kysumang','Kỹ sư mạng'), 
+                                ('thokinh','Thợ làm kính'),
+                                ('bsygiadinh','Bác sỹ gia đình'), 
+                                ('gvmamnon','Giáo viên mầm non'),
+                                ('duhoc','Quản lý dự án xây dựng'),
+                                 #Bosung
+                                ('beautytherapist', 'Beauty Therapist'),
+                                ('bocnoithat', 'Thợ bọc nội thất'),
+                                #
                                 ('khac', 'Nghề khác')], 
                                 string="Nghề booking", default=False)
     nguoithan = fields.Text(string="Ứng viên có người thân hỗ trợ công việc/ nhà ở tại quốc gia mình mong muốn hay không?")

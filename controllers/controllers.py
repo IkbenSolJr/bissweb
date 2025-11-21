@@ -212,8 +212,8 @@ class Bissweb(http.Controller):
                 #'thunhapbds_dh': kwargs.get('thunhapbds_dh'),
                 'sotk_dh': kwargs.get('sotk_dh'),
                 'tsbds_dh': kwargs.get('tsbds_dh'),
-                'luongthang': kwargs.get('luongthang'),
-                'luongthang_pt': kwargs.get('luongthang_pt'),
+                #'luongthang': kwargs.get('luongthang'),
+                #'luongthang_pt': kwargs.get('luongthang_pt'),
                 'thunhapbds': kwargs.get('thunhapbds'),
                 'sotk': kwargs.get('sotk'),
                 'tsbds': kwargs.get('tsbds'),
@@ -307,7 +307,7 @@ class Bissweb(http.Controller):
                 }
                 
                 mail = request.env['mail.mail'].sudo().create(mail_values)
-                mail.send()
+                mail.sudo().send()
                 
             except Exception as email_error:
                 # Log lỗi email nhưng không làm gián đoạn quá trình
